@@ -14,7 +14,7 @@ const mongoose= require('mongoose');
 
 const deleteId =(req,res)=>{
     const id = req.params.postID;
-    
+
     
 
         
