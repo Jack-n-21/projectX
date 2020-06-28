@@ -1,23 +1,21 @@
-import { post } from '../app';
+import { result } from 'lodash';
 
-const express = require('express');
-const app = express();
-const postRoutes = require('./routes/posts');
-const bodyparser = require('body-parser');
-const mongoose= require('mongoose');
-const config = require('./helpers/config');
-const MongoClient = require('mongodb').MongoClient;
-
-
-
-const mongoose= require('mongoose');
+const Post = require('../models/posts');
 
 const deleteId =(req,res)=>{
-    const id = req.params.postID;
+    const id = req.params.postID; 
+    Post.remove({_id: id})
+    .exec()
+    .then(result =>{
+        res.status(200).json(result);
 
-    
-
-        
+    }) 
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    })      
 
 };
 
